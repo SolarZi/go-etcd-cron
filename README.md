@@ -17,10 +17,10 @@ This package aims at implementing a distributed and fault tolerant cron in order
 By default the library creates an etcd client on `127.0.0.1:2379`
 
 ```go
-c, _ := clientv3.New(clientv3.Config{
+c, _ := etcdcron.NewEtcdMutexBuilder(clientv3.Config{
   Endpoints: []string{"etcd-host1:2379", "etcd-host2:2379"},
 })
-cron, _ := etcdcron.New(WithEtcdMutexBuilder(c))
+cron, _ := etcdcron.New(etcdcron.WithEtcdMutexBuilder(c))
 cron.AddJob(Job{
   Name: "job0",
   Rhythm: "*/2 * * * * *",
